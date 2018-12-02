@@ -1,7 +1,7 @@
 from flask import Flask
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database.database_setup import Base, Restaurant, MenuItem
+from database_setup import Base, Restaurant, MenuItem
 app = Flask(__name__)
 
 
@@ -21,6 +21,12 @@ def HelloWorld():
         for i in items:
             output += i.name
             output += '</br>'
+            output += i.price
+            output += '</br>'
+            output += i.description
+            output += '</br>'
+            output += '</br>'
+
         return output
     except:
         return "no results"

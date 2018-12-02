@@ -12,10 +12,10 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 @app.route('/')
-@app.route('/hello')
-def HelloWorld():
-    restaurant = session.query(Restaurant).first()
+@app.route('/restaurants/<int:restaurant_id>/')
+def restaurantMenu(restaurant_id):
     try:
+        restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
         items = session.query(MenuItem).filter_by(restaurant_id=restaurant.id)
         output = ''
         for i in items:
@@ -29,8 +29,7 @@ def HelloWorld():
 
         return output
     except:
-        return "no results"
-
+        return "no result found for restaurant {}".format(restaurant_id)
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=5000)

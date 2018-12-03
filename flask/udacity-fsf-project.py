@@ -54,6 +54,7 @@ def editMenuItem(restaurant_id, menu_id):
         item.name = new_name
         session.add(item)
         session.commit()
+        flash("menu item edited!")
         return redirect(url_for('restaurantMenu', restaurant_id =
                                 restaurant_id))
     else:
@@ -67,6 +68,6 @@ def deleteMenuItem(restaurant_id, menu_id):
 
 
 if __name__ == '__main__':
-    app.secret_key = "sec_key"gi
+    app.secret_key = "sec_key"
     app.debug = True
     app.run(host='0.0.0.0', port=5000)
